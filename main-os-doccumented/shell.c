@@ -8,6 +8,7 @@ void shell() {
 
   uart_loadOutputFifo(); // this is my understanding
   // read the initial data from the serial cable sent
+  //
 
   if (uart_isReadByteReady()) { // check ready to read
     unsigned char ch =
