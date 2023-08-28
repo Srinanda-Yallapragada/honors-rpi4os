@@ -1,8 +1,9 @@
 #include "io.h"
-
-void main()
-{
-    uart_init();
-    uart_writeText("Hello world!\n");
-    while (1);
+#include "shell.h"
+void main() {
+  uart_init();
+  uart_writeText("Welcome to Srinanda's honors thesis OS! \nOS_name>");
+  while (1) {
+    shell();
+  }
 }
