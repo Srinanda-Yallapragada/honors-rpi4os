@@ -160,12 +160,24 @@ Writing a shell is fun! Moving onto a parser
 
 Sep 19 meeting!
 Next steps 
-Bare minimum files on the SD card 
+Bare minimum files on the SD card  -> Done!  
+A DTB file is a device tree (or devicetree) blob file used by the Linux kernel. It contains binary data that describes a computer's hardware. DTB files allow operating systems to manage a computer's components by telling the operating system what hardware the computer includes. This file was called bootbin.bin on the rp3. Essentially bcm2711-rpi-4-b.dtb is a binary hardware describing file is my understanding
+
+Config.txt is used to set params that make it easier to interact with the rpi4 such as core_freq_min and arm_64bit
+
+fixup.dat, is used to configure the SDRAM partition between the GPU and the CPU
+
+Start.elf It programs the GPU up for display, sorts out all the interfaces etc - prior to jumping to user code.
+
+And our very own kernel.8 
+Those are the 5 bare minimum files we are using 
+
+
 Look into scheduling -> what it takes to implement round robin
-Look into process management 
-Its an os when you manage resources 
-Implement string.h
-Implement parser 
-I need a better working shell, and I want to be able to write and read from memory and use that as files create write and delete maximum file size 
-Get to part 5 on rust! 
+Look into process management, Its an os when you manage resources 
+Implement string.h -> On the way, added lenstr() and cmpstr()
+Implement parser -> Done! Can parse a command from our UART interface
+I need a better working shell, and I want to be able to write and read from memory and use that as files create write and delete m aximum file size 
+Get to part 5 on rust! -> Done? Kinda, able to run rust code, but have not done a line by line
+
 
