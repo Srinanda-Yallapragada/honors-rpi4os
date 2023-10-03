@@ -1,3 +1,4 @@
 https://s-matyukevich.github.io/raspberry-pi-os/docs/lesson04/rpi-os.html
 https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/Introduction.md
 https://datasheets.raspberrypi.com/bcm2711/bcm2711-peripherals.pdf
+https://os.phil-opp.com/
