@@ -181,3 +181,15 @@ I need a better working shell, and I want to be able to write and read from memo
 Get to part 5 on rust! -> Done? Kinda, able to run rust code, but have not done a line by line
 
 
+
+Oct3 Meeting:
+Redirect thesis into Rust translation 
+What does it look like to rewrite an C OS in Rust? 
+Here is some C code, Here is some Rust code compare them, what was it like doing this 
+Why is everyone translating everything into rust add the meme if you want
+Todo
+1) Rework my checkpoints, what is the end goals, what is safety strech goals
+2) Write a thesis statements
+3) Interoperability with C and Rust? How to make that work? 
+4) Implement Hello World in Rust things Chapter 3
+5) 
