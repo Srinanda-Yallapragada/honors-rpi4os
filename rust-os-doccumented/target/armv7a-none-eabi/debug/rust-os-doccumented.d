@@ -1,0 +1,1 @@
+/home/nandu/honors-rpi4os/rust-os-doccumented/target/armv7a-none-eabi/debug/rust-os-doccumented: /home/nandu/honors-rpi4os/rust-os-doccumented/src/io.rs /home/nandu/honors-rpi4os/rust-os-doccumented/src/main.rs
