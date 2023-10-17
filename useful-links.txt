@@ -3,3 +3,4 @@ https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/Introduction.m
 https://datasheets.raspberrypi.com/bcm2711/bcm2711-peripherals.pdf
 https://os.phil-opp.com/
 https://github.com/RusPiRo/ruspiro-uart/blob/development/src/uart1/interface.rs
+https://blog.guissalustiano.dev/posts/01-blink_rust_rasp4/
