@@ -4,3 +4,4 @@ https://datasheets.raspberrypi.com/bcm2711/bcm2711-peripherals.pdf
 https://os.phil-opp.com/
 https://github.com/RusPiRo/ruspiro-uart/blob/development/src/uart1/interface.rs
 https://blog.guissalustiano.dev/posts/01-blink_rust_rasp4/
+https://github.com/juan-iniguez/rustpi/blob/main/src/io.rs

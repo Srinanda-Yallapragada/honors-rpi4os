@@ -193,3 +193,43 @@ Todo
 3) Interoperability with C and Rust? How to make that work? 
 4) Implement Hello World in Rust things Chapter 3
 5) 
+
+
+so rust is hard. very hard. infact so hard that for me trying to start 
+writing rust has led to simply using unsafe in every single section of the 
+This essentially means that I am not leveraging any of rust's benfits
+so i need to recalibrate 
+
+one idea is to simple ditch rust saying it was unfeasble and move to c
+and really program the scheduler and multicores stuff because the 
+tutorial is easy to follow
+
+My thesis statement right now really feels like a 
+"can i build an os even vaugely rn?"
+and nothing more than that. 
+Could be an exploration into the concepts you need to know to 
+build an working OS and what components need to go into that stuff
+
+ignoring Interoperability for now because its kind of divergent 
+The hello world was 1) not implemented by me 2) was a simple blinking led 
+
+My rust progress is ROUGH and has set fear in my heart slightly lol
+
+I have not considered utillizing anythng but the bare language in both c
+and rust. Rust has cargo tools that make life easier but I have not 
+touched them in the slightest. is this a good or a bad thing?
+
+oct 17 10:45 
+putting baremetal wizardry in there as the title 
+-> Is are we just writing c code in rust? everything is unsafe 
+one unsafe write volatile makes everyting that calls it unsafe
+
+-> remove unsafe warning? 
+resources are sparse for rust baremetal
+
+C has to go till process management odd even printing stuff 100% has to get there 
+Rust has to go atleast till uart for me to make this a thesis
+
+then writing about this stuff become easier
+
+
