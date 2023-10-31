@@ -1,8 +1,14 @@
 #![no_std]
 #![no_main]
 
+use core::arch::{asm, global_asm};
 use core::panic::PanicInfo;
 mod io;
+
+use io::uart_init;
+
+// Include the bootloader when Linking
+global_asm!(include_str!("boot.S"));
 
 mod boot {
     use core::arch::global_asm;
@@ -11,10 +17,9 @@ mod boot {
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
+    uart_init();
     loop {
-        unsafe {
-            io::uart_write_text("hello \n");
-        }
+        io::uart_writeText("hello \n");
     }
 }
 
