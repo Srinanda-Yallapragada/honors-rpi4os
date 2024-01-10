@@ -5,3 +5,5 @@ https://os.phil-opp.com/
 https://github.com/RusPiRo/ruspiro-uart/blob/development/src/uart1/interface.rs
 https://blog.guissalustiano.dev/posts/01-blink_rust_rasp4/
 https://github.com/juan-iniguez/rustpi/blob/main/src/io.rs
+https://github.com/wizofe/rust-raspi3-tutorial/blob/master/03_uart1/src/uart.rs
+https://harmonicss.co.uk/rust/rust-on-a-raspberry-pi-part-1/

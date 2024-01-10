@@ -16,7 +16,7 @@ mod boot {
 }
 
 #[no_mangle]
-pub extern "C" fn _start() -> ! {
+pub extern "C" fn main() -> ! {
     uart_init();
     loop {
         io::uart_writeText("hello \n");

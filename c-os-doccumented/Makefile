@@ -11,7 +11,7 @@ GCCFLAGS = -Wall -O2 -ffreestanding -nostdinc -nostdlib -nostartfiles
 #
 #
 
-GCCPATH=/home/nandu/arm-gnu-toolchain-13.2.Rel1-x86_64-aarch64-none-elf/bin
+GCCPATH=/home/nandu/arm-gnu-toolchain-13.2.rel1-x86_64-aarch64-none-elf/bin
 # absolute path to arm cross compiler latest release instead of the one used in rpi4os.com tutorial
 all: clean kernel8.img
 # kernel8.img is the main kernal file that needs to be put onto the SD card
