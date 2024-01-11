@@ -17,4 +17,4 @@ kernel8.img: $(OFILES)
 	$(GCCPATH)/aarch64-none-elf-objcopy -O binary kernel8.elf kernel8.img
 
 clean:
-	/bin/rm kernel8.elf */*.o *.img > /dev/null 2> /dev/null || true
+	/bin/rm kernel8.elf *.o *.img > /dev/null 2> /dev/null || true
