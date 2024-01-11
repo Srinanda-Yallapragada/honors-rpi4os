@@ -1,4 +1,4 @@
-#include "sysregs.h"
+#include "../include/sysregs.h"
 
 #define LOCAL_CONTROL   0xff800000
 #define LOCAL_PRESCALER 0xff800008

@@ -1,6 +1,8 @@
 #define PERIPHERAL_BASE 0xFE000000
 #define CLOCKHZ 1000000
 
+//see page 143 of https://datasheets.raspberrypi.com/bcm2711/bcm2711-peripherals.pdf for information about timer regs. 
+
 struct timer_regs {
     volatile unsigned int control_status;
     volatile unsigned int counter_lo;
@@ -43,3 +45,4 @@ void enable_interrupt_controller();
 void disable_interrupt_controller();
 
 void handle_timer_1();
+void handle_timer_3();

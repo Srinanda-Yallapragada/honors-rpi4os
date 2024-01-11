@@ -1,9 +1,11 @@
-#include "kernel.h"
-#include "io.h"
-#include "string.h"
+#include "../include/kernel.h"
+#include "../include/io.h"
+#include "../include/string.h"
 
 // from multicore.h and multicore.c
 unsigned int spin_cpu1;
+
+int num_timer_handle_timer_called = 0;
 
 void store32(unsigned long address, unsigned long value) {
   *(unsigned long *)address = value;
@@ -34,21 +36,6 @@ void wait_msec(unsigned int n) {
   } while (r < t);
 }
 
-void core0_main(void) {
-  unsigned int core0_val = 0;
-
-  while (core0_val <= 20) {
-    wait_msec(0x50000);
-    core0_val++;
-  }
-
-  irq_disable();
-  disable_interrupt_controller();
-
-  while (1)
-    ;
-}
-
 // TIMER FUNCTIONS
 
 const unsigned int timer1_int = CLOCKHZ;
@@ -59,8 +46,6 @@ void timer_init() {
   timer1_val += timer1_int;
   REGS_TIMER->compare[1] = timer1_val;
 }
-
-int num_timer_handle_timer_called = 0;
 
 void handle_timer_1() {
   timer1_val += timer1_int;
@@ -78,7 +63,11 @@ void handle_timer_1() {
 
 void main(void) {
   uart_init();
+  store32(0xA0000000, 42);
   uart_writeText("Is the grinding happening?!");
+  char *out_to_uart = "";
+  getDecStr(out_to_uart, 3, load32(0xA0000000));
+  uart_writeText(out_to_uart);
 
   // Kick off the timers
 
@@ -86,8 +75,14 @@ void main(void) {
   enable_interrupt_controller();
   irq_enable();
   timer_init();
+  num_timer_handle_timer_called =
+      0; // resseting here as you want to see this after the timer has been
+         // initted normally, about 650 interrupts go off before we see output
+         // on the uart wihtout this line
 
   // Loop endlessly
 
-  core0_main();
+  // core0_main();
+  while (1)
+    ;
 }

@@ -1,4 +1,4 @@
-#include "kernel.h"
+#include "../include/kernel.h"
 
 void enable_interrupt_controller() {
   REGS_IRQ->irq0_enable_0 = SYS_TIMER_IRQ_1;
