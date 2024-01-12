@@ -6,10 +6,33 @@
 
 int num_timer_handle_timer_called = 0;
 
+void wait_msec(unsigned int n) {
+  register unsigned long f, t, r;
+
+  // Get the current counter frequency
+  asm volatile("mrs %0, cntfrq_el0" : "=r"(f));
+  // Read the current counter
+  asm volatile("mrs %0, cntpct_el0" : "=r"(t));
+  // Calculate expire value for counter
+  t += ((f / 1000) * n) / 1000;
+  do {
+    asm volatile("mrs %0, cntpct_el0" : "=r"(r));
+  } while (r < t);
+}
+
 // testing exec fuction of a fake workload essentially
 void sayMoo() { uart_writeText("\n Moo! \n "); }
 
 void sayMeow() { uart_writeText("\n Meow! \n "); }
+
+void spell_5_letter_word(char *array) {
+  while (1) {
+    for (int i = 0; i < 5; i++) {
+      uart_writeText(&array[i]);
+      wait_msec(100000);
+    }
+  }
+}
 
 // TIMER FUNCTIONS
 
@@ -39,9 +62,11 @@ void handle_timer_1() {
 void main(void) {
   uart_init();
   uart_writeText("switcheroooo?!");
-  exec(sayMeow);
-  add_to_process_list(sayMeow);
-  
+
+  add_to_process_list((unsigned long)&spell_5_letter_word,
+                      (unsigned long)"1234");
+  add_to_process_list((unsigned long)&spell_5_letter_word,
+                      (unsigned long)"abcd");
 
   // Kick off the timers
 

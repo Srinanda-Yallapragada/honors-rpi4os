@@ -21,11 +21,19 @@ struct process_control_block {
   long pid;
 };
 
-// unsigned num_processes = 42;
-// struct process_control_block process_list[MAX_NUM_PROCESS] = {};
+unsigned num_processes = 0;
+struct process_control_block process_list[MAX_NUM_PROCESS] = {};
 
 void exec(void (*f)()) { (f)(); }
 
-void add_to_process_list(void (*f)()) {
-  uart_writeText("called add to process \n");
+void add_to_process_list(unsigned long fn, unsigned long arg) {
+  // add num process check to prevent adding to many processese
+  num_processes += 1;
+  struct process_control_block *p;
+
+  p = (struct process_control_block *)get_free_page();
+  p->pid = num_processes;
+  p->x19 = fn;
 }
+
+void run_programs() {}
