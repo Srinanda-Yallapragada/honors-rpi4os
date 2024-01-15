@@ -1,28 +1,31 @@
-#define SYNC_INVALID_EL1t		0 
-#define IRQ_INVALID_EL1t		1 
-#define FIQ_INVALID_EL1t		2 
-#define ERROR_INVALID_EL1t		3 
+// see this https://stackoverflow.com/questions/21624155/difference-between-equ-and-word-in-arm-assembly
+// could not use #defines as that is c 
 
-#define SYNC_INVALID_EL1h		4 
-#define IRQ_INVALID_EL1h		5 
-#define FIQ_INVALID_EL1h		6 
-#define ERROR_INVALID_EL1h		7 
+.equ SYNC_INVALID_EL1t,	0 
+.equ IRQ_INVALID_EL1t,	1 
+.equ FIQ_INVALID_EL1t,	2 
+.equ ERROR_INVALID_EL1t,	3 
 
-#define SYNC_INVALID_EL0_64		8 
-#define IRQ_INVALID_EL0_64		9 
-#define FIQ_INVALID_EL0_64		10 
-#define ERROR_INVALID_EL0_64		11 
+.equ SYNC_INVALID_EL1h,	4 
+.equ IRQ_INVALID_EL1h,	5 
+.equ FIQ_INVALID_EL1h,	6 
+.equ ERROR_INVALID_EL1h,	7 
 
-#define SYNC_INVALID_EL0_32		12 
-#define IRQ_INVALID_EL0_32		13 
-#define FIQ_INVALID_EL0_32		14 
-#define ERROR_INVALID_EL0_32		15 
+.equ SYNC_INVALID_EL0_64,		8 
+.equ IRQ_INVALID_EL0_64,	9 
+.equ FIQ_INVALID_EL0_64,	10 
+.equ ERROR_INVALID_EL0_64,		11 
+
+.equ SYNC_INVALID_EL0_32,		12 
+.equ IRQ_INVALID_EL0_32,		13 
+.equ FIQ_INVALID_EL0_32,		14 
+.equ ERROR_INVALID_EL0_32,		15 
 
 //stack frame size
-#define S_FRAME_SIZE			256
+.equ S_FRAME_SIZE,			256
 
 .macro kernel_entry
-	sub 	sp, sp, #S_FRAME_SIZE
+	sub 	sp, sp, #S_FRAME_SIZE // manually changing the defines into number to see if itll please the rust compiler
 	stp 	x0, x1, [sp, #16 * 0]
 	stp 	x2, x3, [sp, #16 * 1]
 	stp	x4, x5, [sp, #16 * 2]
@@ -39,24 +42,10 @@
 	stp	x26, x27, [sp, #16 * 13]
 	stp	x28, x29, [sp, #16 * 14]
 	str	x30, [sp, #16 * 15] 
-
-  mrs	x22, elr_el1
-	mrs	x23, spsr_el1
-
-  stp	x30, x22, [sp, #16 * 15] 
-	str	x23, [sp, #16 * 16]
-
 .endm
 
 .macro kernel_exit
-
-  ldr	x23, [sp, #16 * 16]
-	ldp	x30, x22, [sp, #16 * 15] 
-
-	msr	elr_el1, x22			
-	msr	spsr_el1, x23
-
-  ldp	x0, x1, [sp, #16 * 0]
+	ldp	x0, x1, [sp, #16 * 0]
 	ldp	x2, x3, [sp, #16 * 1]
 	ldp	x4, x5, [sp, #16 * 2]
 	ldp	x6, x7, [sp, #16 * 3]
@@ -169,49 +158,6 @@ handle_el1_irq:
 	kernel_entry 
 	bl	handle_irq
 	kernel_exit 
-
-.globl ret_from_fork
-ret_from_fork:
-	//bl	schedule_tail dont know if i need this yet
-	mov	x0, x20
-	blr	x19 		//should never return
-
-.globl cpu_switch_to
-cpu_switch_to:
-    mov    x10, #0
-    add    x8, x0, x10
-    mov    x9, sp
-    stp    x19, x20, [x8], #16        // store callee-saved registers
-    stp    x21, x22, [x8], #16
-    stp    x23, x24, [x8], #16
-    stp    x25, x26, [x8], #16
-    stp    x27, x28, [x8], #16
-    stp    x29, x9, [x8], #16
-    str    x30, [x8]
-    add    x8, x1, x10
-    ldp    x19, x20, [x8], #16        // restore callee-saved registers
-    ldp    x21, x22, [x8], #16
-    ldp    x23, x24, [x8], #16
-    ldp    x25, x26, [x8], #16
-    ldp    x27, x28, [x8], #16
-    ldp    x29, x9, [x8], #16
-    ldr    x30, [x8]
-    mov    sp, x9
-    ret
-
-.global cpu_run
-cpu_run:
-    // Preserve the function address
-    mov x2, x0
-
-    // Move the argument from x1 to x0
-    mov x0, x1
-
-    // Branch to the function address
-    blr x2 
-
-cpu_run_pcb: 
-
 
 .globl err_hang
 err_hang: b err_hang

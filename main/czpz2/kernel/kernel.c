@@ -51,6 +51,10 @@ void handle_timer_1() {
   REGS_TIMER->control_status |= SYS_TIMER_IRQ_1;
   num_timer_handle_timer_called += 1;
 
+  // irq_enable();
+  // schedule_and_run();
+  // irq_disable();
+
   // char *out_to_uart = "";
   // getDecStr(out_to_uart, 3,
   //           num_timer_handle_timer_called); // overwrites out_to_uart
@@ -61,12 +65,23 @@ void handle_timer_1() {
 
 void main(void) {
   uart_init();
-  uart_writeText("switcheroooo?!");
+  uart_writeText("schedulerooo?!");
+  // cpu_run((unsigned long)spell_5_letter_word, (unsigned int) "12345");
+  //print out address of spell_5_letter_word and the address of the string
 
-  add_to_process_list((unsigned long)&spell_5_letter_word,
-                      (unsigned long)"1234");
-  add_to_process_list((unsigned long)&spell_5_letter_word,
-                      (unsigned long)"abcd");
+uart_writeText("address of spell_5_letter_word: ");
+
+  char *out_to_uart = "";
+  getDecStr(out_to_uart, 10,
+            (unsigned long)spell_5_letter_word); // overwrites out_to_uart
+
+  uart_writeText(out_to_uart);
+  uart_writeText("\n");
+
+  add_to_process_list((unsigned long)spell_5_letter_word,
+                      (unsigned long)"12345");
+  add_to_process_list((unsigned long)spell_5_letter_word,
+                      (unsigned long)"abcde");
 
   // Kick off the timers
 
@@ -80,6 +95,7 @@ void main(void) {
          // initted normally, about 650 interrupts go off before we see output
          // on the uart wihtout this line
 
+  schedule_and_run();
   // Loop endlessly
 
   while (1)

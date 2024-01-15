@@ -1,3 +1,3 @@
-void exec(void (*f)());
+void exec(unsigned int f);
 void add_to_process_list(unsigned long fn, unsigned long arg);
-void run_programs();
+void schedule_and_run();
