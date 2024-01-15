@@ -32,7 +32,7 @@ fn panic(_panic: &PanicInfo<'_>) -> ! {
 
 // This is not the rustic way! but code that runs is better than code that doesnt run but is pristinely written!
 
-const TIMER_INT: u32 = 1 + 000_000;
+const TIMER_INT: u32 = 1000000;
 static mut TIMER_VAL: u32 = 0;
 static mut NUM_TIMER_CALLED: u32 = 0;
 #[no_mangle]
@@ -48,7 +48,6 @@ pub fn timer_init() -> () {
 #[no_mangle]
 
 pub fn handle_timer_1() -> () {
-    uart_writeText("made it into handle timer went off!\n");
     unsafe {
         NUM_TIMER_CALLED += 1;
 

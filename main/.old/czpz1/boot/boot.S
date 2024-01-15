@@ -5,7 +5,6 @@
 #define OSC_FREQ        54000000
 #define MAIN_STACK      0x400000
 
-
 .section ".text.boot"  // Make sure the linker puts this at the start of the kernel image
 
 .global _start  // Execution starts here
@@ -15,7 +14,11 @@ _start:
     ldr     x0, =LOCAL_CONTROL   // Sort out the timer
     str     wzr, [x0]
     mov     w1, 0x80000000
-    str     w1, [x0, #(LOCAL_PRESCALER - LOCAL_CONTROL)]
+    // str     w1, [x0, #(LOCAL_PRESCALER - LOCAL_CONTROL)] This is code that assumed c preprocessor
+    ldr     x5, =LOCAL_PRESCALER // this is the alternative for rust
+    ldr     x6, =LOCAL_CONTROL
+    sub     x5, x5, x6
+    str     w1, [x0, x5]
 
     ldr     x0, =OSC_FREQ
     msr     cntfrq_el0, x0

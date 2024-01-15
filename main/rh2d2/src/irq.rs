@@ -57,24 +57,24 @@ pub const ARM_IRQ_REGS: ArmIrqRegs2711 = ArmIrqRegs2711 {
 pub fn enable_interrupt_controller() -> () {
     unsafe {
         // enable the system timer interrupt IRQ 1
-        core::ptr::write_volatile(ARM_IRQ_REGS.irq0_enable_1 as *mut u32, SYS_TIMER_IRQ_1);
+        core::ptr::write_volatile(ARM_IRQ_REGS.irq0_enable_0 as *mut u32, SYS_TIMER_IRQ_1);
     }
 }
 #[no_mangle]
-pub fn disbale_interrupt_controller() -> () {
+pub fn disable_interrupt_controller() -> () {
     unsafe {
         // disable the system timer interrupt IRQ 1
-        core::ptr::write_volatile(ARM_IRQ_REGS.irq0_enable_1 as *mut u32, 0);
+        core::ptr::write_volatile(ARM_IRQ_REGS.irq0_enable_0 as *mut u32, 0);
     }
 }
 
 #[no_mangle]
 pub fn handle_irq() {
     unsafe {
-        let mut irq = core::ptr::read_volatile(ARM_IRQ_REGS.irq0_pending_0);
+        let mut irq: u32 = core::ptr::read_volatile(ARM_IRQ_REGS.irq0_pending_0);
 
         while irq != 0 {
-            if irq & SYS_TIMER_IRQ_1 != 0 {
+            if (irq & SYS_TIMER_IRQ_1 ) != 0 {
                 irq &= !SYS_TIMER_IRQ_1;
                 handle_timer_1();
             }
