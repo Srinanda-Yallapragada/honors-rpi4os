@@ -55,7 +55,7 @@ To build and run the microkernels, follow these steps:
 
 ### C Microkernel
 
-1. Download the Arm GNU Cross Compiler. I used version arm-gnu-toolchain-13.2.rel1-x86_64-aarch64-none-elf for this project.
+1. Download the Arm GNU Toolchain. I used version arm-gnu-toolchain-13.2.rel1-x86_64-aarch64-none-elf for this project.
 2. Change the Makefile path to where you installed the Arm GNU toolchain. 
 3. Run `make` to build the C microkernel.
 4. Copy the kernel8.img generated onto your Raspberry Pi 4B. Make sure it also contains the following files: bcm2711-rpi-4-b.dtb, fixup4.dat, start4.elf, config.txt.
