@@ -64,15 +64,12 @@ To build and run the microkernels, follow these steps:
 
 ### Rust Microkernel
 
-. Install rust using rustup. I installed the language using the defaults.
-. Install the required target by running `rustup target add aarch64-unknown-none-softfloat thumbv7m-none-eabi` and `rustup component add llvm-tools-preview`
+1. Install rust using rustup. I installed the language using the defaults.
+2. Install the required target by running `rustup target add aarch64-unknown-none-softfloat thumbv7m-none-eabi` and `rustup component add llvm-tools-preview`
+3. Run `cargo build` to build the Rust microkernel.
+4. Run `cargo objcopy --release -- -O binary kernel8.img` to generate the kernel binary.
+5. Copy the kernel8.img generated onto your Raspberry Pi 4B. Make sure it also contains the following files: bcm2711-rpi-4-b.dtb, fixup4.dat, start4.elf, config.txt.
+6. Connect your Raspberry Pi 4B through GPIO pins to your system using a USB to TTL Serial Cable. Use the rp4 file for configuration of Putty, where you will see the output.
 
-. Run `cargo build --release` to build the Rust microkernel.
-. Run 
-. Load the compiled binary onto the Raspberry Pi 4.
 
-## Conclusion
-
-The project sheds light on the nuances of bare-metal programming in Rust and C. Despite challenges, Rust's user-friendly error messages and tooling demonstrate its potential advantages. The GitHub repository includes detailed documentation and code comparisons for further exploration.
-
-Feel free to explore the code and contribute to the project!
+The project sheds light on the beginner process of bare-metal programming in Rust and C. Rust's memory safey design and user-friendly error messages demonstrate its potential advantages in the systems space over C. The GitHub repository includes commented code in main and my unfinsihed progress in exploratory-code where I tried working to create an exec function, a shell and implement context switching in the C verion.
