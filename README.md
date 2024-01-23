@@ -8,7 +8,7 @@ This repository is for my Honors Portfolio @ UMass Amherst. It explores bare-met
 ## Folder Structure
 
 - **main/czpz-commented:**
-  - Contains the C implementation of the single-core interrupt firing microkernel.
+  - Contains the C implementation of a single-core interrupt firing microkernel.
 
   - **Files:**
     - `main/czpz/boot/`
@@ -32,7 +32,7 @@ This repository is for my Honors Portfolio @ UMass Amherst. It explores bare-met
       - `string.c`: Implementation of string functions.
 
 - **main/rhd2-commented:**
-  - Contains the Rust implementation of the microkernel.
+  - Contains the Rust implementation of a single-core interrupt firing microkernel.
   - **Files:**
     - `main/rhd2/`
       - `.cargo/config.toml`: Configuration file instructing the compiler to use the correct linker script and triple target aarch64-unknown-none-softfloat.
@@ -40,7 +40,7 @@ This repository is for my Honors Portfolio @ UMass Amherst. It explores bare-met
       - `Cargo.lock`: Automatically generated file describing dependencies based on Cargo.toml.
       - `linker.ld`: Linker script used during compilation. Initially taken from rpi4os.com.
 
-    - `main/rhd2/src`
+    - `main/rhd2/src/`
       - `boot.S`: ARM assembly instructions for timer configuration, EL1 setup, stack establishment, and main kernel entry point. Initially taken from rpi4os.com.
       - `io.rs`: Rust file containing io.h declarations and their implementations, consolidating UART-related functionality.
       - `irqentry.S`: Assembly code for loading the interrupt vector table and managing system state during interrupts. Initially taken from rpi4os.com.
@@ -55,15 +55,21 @@ To build and run the microkernels, follow these steps:
 
 ### C Microkernel
 
-1. Navigate to the `/c_microkernel` directory.
-2. Run `make` to build the C microkernel.
-3. Load the compiled binary onto the Raspberry Pi 4.
+1. Download the Arm GNU Cross Compiler. I used version arm-gnu-toolchain-13.2.rel1-x86_64-aarch64-none-elf for this project.
+2. Change the Makefile path to where you installed the Arm GNU toolchain. 
+3. Run `make` to build the C microkernel.
+4. Copy the kernel8.img generated onto your Raspberry Pi 4B. Make sure it also contains the following files: bcm2711-rpi-4-b.dtb, fixup4.dat, start4.elf, config.txt.
+5. Connect your Raspberry Pi 4B through GPIO pins to your system using a USB to TTL Serial Cable. Use the rp4 file for configuration of Putty, where you will see the output.
+
 
 ### Rust Microkernel
 
-1. Navigate to the `/rust_microkernel` directory.
-2. Run `cargo build` to build the Rust microkernel.
-3. Load the compiled binary onto the Raspberry Pi 4.
+. Install rust using rustup. I installed the language using the defaults.
+. Install the required target by running `rustup target add aarch64-unknown-none-softfloat thumbv7m-none-eabi` and `rustup component add llvm-tools-preview`
+
+. Run `cargo build --release` to build the Rust microkernel.
+. Run 
+. Load the compiled binary onto the Raspberry Pi 4.
 
 ## Conclusion
 
