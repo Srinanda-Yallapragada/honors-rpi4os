@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This repository is for my Honors Portfolio @ UMass Amherst. It explores bare-metal programming on the RPi4, aiming to highlight the developer experience of both C and Rust. The primary objective was to provide valuable insights for developers, particularly those venturing into the intricacies of low-level coding in Rust coming from a background in C.
+This repository is for my Honors Portfolio @ UMass Amherst. It explores bare-metal programming on the RPi4, aiming to highlight the developer experience of both C and Rust. The primary objective was to provide valuable insights for developers, particularly those venturing into the intricacies of low-level coding in Rust coming from a background in C. Heavily following the rpi4os.com tutorial on writing a baremetal OS for the Raspberry Pi 4B.
 
 
 ## Folder Structure
