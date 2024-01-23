@@ -10,7 +10,7 @@ _start:
     // if x1 is 0, we are on the main core
 
     // We're not on the main core, so hang in an infinite wait loop
-1:  wfe
+1:  wfe //wait-for-event
     b       1b
 
 

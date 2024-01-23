@@ -21,8 +21,8 @@ _start:
     // str     w1, [x0, x5]
 
     ldr     x0, =OSC_FREQ // set up oscillation frequency for the timer 
-    msr     cntfrq_el0, x0 //TODO
-    msr     cntvoff_el2, xzr //TODO
+    msr     cntfrq_el0, x0 //Counter-timer Frequency register
+    msr     cntvoff_el2, xzr //Counter-timer Virtual Offset register, xzr is the 0 register see https://stackoverflow.com/questions/42788696/why-might-one-use-the-xzr-register-instead-of-the-literal-0-on-armv8
     // Check processor ID is zero (executing on main core), else hang
     mrs     x1, mpidr_el1
     and     x1, x1, #3
@@ -40,23 +40,23 @@ _start:
 
     // Now get ready to switch from EL3 down to EL1
     // Signals CPU to execute in EL1 by setting particular bits
-    // These are predefined flags/ registers
-    ldr     x0, =SCTLR_VALUE_MMU_DISABLED
+    // These are predefined flags/ registers in sysregs.h
+    ldr     x0, =SCTLR_VALUE_MMU_DISABLED //disable mmu
     msr	    sctlr_el1, x0		
 
-    ldr     x0, =HCR_VALUE
+    ldr     x0, =HCR_VALUE // hypervisor configuration in EL2
     msr     hcr_el2, x0
 
-    ldr     x0, =SCR_VALUE
+    ldr     x0, =SCR_VALUE //Secure Configuration Register
     msr     scr_el3, x0
 
-    ldr     x0, =SPSR_VALUE
-    msr     spsr_el3, x0
+    ldr     x0, =SPSR_VALUE //Saved Program Status Register 
+    msr     spsr_el3, x0 
     
     adr     x0, el1_entry		
-    msr     elr_el3, x0
+    msr     elr_el3, x0 // Exception Link Register 
 
-    eret			
+    eret		// return	
 el1_entry:
     // We're in EL1
 
@@ -77,4 +77,4 @@ el1_entry:
     // In case it does return, halt the master core too
     b       1b
 
-.ltorg
+.ltorg //The LTORG directive instructs the assembler to assemble the current literal pool immediately.

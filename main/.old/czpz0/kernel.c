@@ -3,6 +3,6 @@
 void main()
 {
     uart_init();
-    uart_writeText("Grind Time !\n");
+    uart_writeText("Hello World!\n");
     while (1);
 }

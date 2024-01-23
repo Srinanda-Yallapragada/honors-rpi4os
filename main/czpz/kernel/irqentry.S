@@ -59,13 +59,13 @@
 	ldp	x28, x29, [sp, #16 * 14]
 	ldr	x30, [sp, #16 * 15] 
 	add	sp, sp, #S_FRAME_SIZE
-	eret
-.endm
+	eret //return
+.endm //end macro
 
-.macro handle_invalid_entry type // error handling function //TODO
+.macro handle_invalid_entry type // error handling function /
 	kernel_entry
-	mov	x0, #\type
-	mrs	x1, esr_el1
+	mov	x0, #\type // type will be passed into the macro as a parameter
+	mrs	x1, esr_el1 //execption link register
 	mrs	x2, elr_el1
 
         // We could pass this to a function to print an error here
@@ -77,7 +77,7 @@
 .endm
 
 .macro	ventry	label
-.align	7 // needs to be aligned to 7 bits
+.align	7 // needs to be aligned to 7 bits as specified in documentation
 	b	\label
 .endm
 
