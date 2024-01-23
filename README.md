@@ -34,9 +34,20 @@ This repository is for my Honors Portfolio @ UMass Amherst. It explores bare-met
 - **main/rhd2-commented:**
   - Contains the Rust implementation of the microkernel.
   - **Files:**
-    - `main.rs`: Main entry point for the Rust microkernel.
-    - `interrupts.rs`: Implementation of interrupt handling in Rust.
-    - `Cargo.toml`: Cargo configuration file for building the Rust microkernel.
+    - `main/rhd2/`
+      - `.cargo/config.toml`: Configuration file instructing the compiler to use the correct linker script and triple target aarch64-unknown-none-softfloat.
+      - `Cargo.toml`:Describes project metadata and dependencies.
+      - `Cargo.lock`: Automatically generated file describing dependencies based on Cargo.toml.
+      - `linker.ld`: Linker script used during compilation. Initially taken from rpi4os.com.
+
+    - `main/rhd2/src`
+      - `boot.S`: ARM assembly instructions for timer configuration, EL1 setup, stack establishment, and main kernel entry point. Initially taken from rpi4os.com.
+      - `io.rs`: Rust file containing io.h declarations and their implementations, consolidating UART-related functionality.
+      - `irqentry.S`: Assembly code for loading the interrupt vector table and managing system state during interrupts. Initially taken from rpi4os.com.
+      - `irq.rs`: Contains structs defining timer and interrupt registers, along with IRQ-related function headers. Manages enabling, disabling, and handling of interrupt requests.
+      - `main.rs`: Main kernel file where the system initializes the timer, sets up interrupts, and enters an endless loop.
+      - `utils.S`: Assembly file with helper functions for vector table initialization, IRQ enabling, and IRQ disabling. Initially taken from rpi4os.com.
+      
 
 ## Getting Started
 
