@@ -1,1 +1,0 @@
-int exec(char* instruction);
